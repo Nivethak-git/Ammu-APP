@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'indicators.dart';
+import 'package:ammu_app/register_page.dart';
 
 // void main() {
 //   runApp(
@@ -53,6 +54,28 @@ class _Home_PageState extends State<Home_Page>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Color(0xFF00224C)),
+              child: Text('Menu',
+                  style: TextStyle(color: Colors.white, fontSize: 24)),
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUpApp()),
+                );
+              },
+              leading: Icon(Icons.logout),
+              title: Text('Log Out'),
+            ),
+          ],
+        ),
+      ),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: Container(
@@ -65,9 +88,13 @@ class _Home_PageState extends State<Home_Page>
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.menu, color: Colors.white),
+                    child: Builder(
+                      builder: (context) => IconButton(
+                        onPressed: () {
+                          Scaffold.of(context).openDrawer(); // ✅ Works now!
+                        },
+                        icon: const Icon(Icons.menu, color: Colors.white),
+                      ),
                     ),
                   ),
                   const Center(
@@ -257,7 +284,6 @@ class _Home_PageState extends State<Home_Page>
                           ),
                           child: Ink(
                             padding: EdgeInsets.all(10),
-
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [Colors.yellow, Colors.deepOrange],
@@ -266,7 +292,6 @@ class _Home_PageState extends State<Home_Page>
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
-
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -275,7 +300,7 @@ class _Home_PageState extends State<Home_Page>
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => HeatwaveIndicatorPage(),
+                                        builder: (context) => Heatwave(),
                                       ),
                                     );
                                   },
